@@ -1,0 +1,198 @@
+/* Caged Squirrels - same colours and pixel font as the game (coffee/settings.py). */
+
+@font-face {
+  font-family: "m6x11";
+  src: url("/static/fonts/m6x11.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --amber: #ffc45c;      /* TEXT_HOVER */
+  --cyan: #60dcff;       /* TEXT_ACCENT */
+  --text: #f5f5f5;       /* TEXT_NORMAL */
+  --muted: #a8a8b4;
+  --panel: rgba(20, 18, 24, 0.92);   /* PANEL_FILL */
+  --page: #1c1a22;
+  --pixel: "m6x11", "Courier New", monospace;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--page); }
+
+body {
+  margin: 0;
+  color: var(--text);
+  font: 18px/1.6 var(--body);
+}
+
+/* m6x11 is drawn on a 16 px grid: keep it at 16, 32 or 48 px so it stays crisp. */
+h1, h2, h3, .site-name, .site-nav a, .button, figcaption, .status {
+  font-family: var(--pixel);
+  font-weight: normal;
+  letter-spacing: 0;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+a { color: var(--amber); }
+a:hover, a:focus { color: var(--cyan); }
+
+img { max-width: 100%; height: auto; image-rendering: pixelated; }
+
+/* --- header ----------------------------------------------------------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 16px 24px;
+  background: var(--panel);
+  border-bottom: 3px solid var(--amber);
+}
+.site-name {
+  color: var(--amber);
+  font-size: 32px;
+  line-height: 1;
+  text-decoration: none;
+}
+.site-nav { display: flex; gap: 24px; }
+.site-nav a {
+  color: var(--text);
+  font-size: 32px;
+  line-height: 1;
+  text-decoration: none;
+}
+.site-nav a:hover, .site-nav a:focus, .site-nav a[aria-current="page"] { color: var(--amber); }
+
+/* --- page --------------------------------------------------------------- */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+}
+main > * + * { margin-top: 1em; }
+
+h1 { color: var(--amber); font-size: 48px; line-height: 1.1; margin: 0.6em 0 0.3em; }
+h2 { color: var(--amber); font-size: 32px; line-height: 1.1; margin: 1.4em 0 0.4em; }
+h3 { color: var(--cyan);  font-size: 32px; line-height: 1.1; margin: 1.2em 0 0.4em; }
+
+.hero {
+  display: block;
+  width: 100%;
+  border: 3px solid var(--amber);
+}
+
+.panel {
+  background: var(--panel);
+  border: 3px solid var(--amber);
+  padding: 8px 24px 16px;
+}
+
+.placeholder {
+  border: 2px dashed var(--muted);
+  color: var(--muted);
+  padding: 12px 16px;
+  font-style: italic;
+}
+
+.status {
+  display: inline-block;
+  color: var(--page);
+  background: var(--cyan);
+  font-size: 32px;
+  line-height: 1;
+  padding: 8px 16px;
+}
+
+/* --- game card on the home page ------------------------------------------ */
+.game-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  background: var(--panel);
+  border: 3px solid var(--amber);
+  padding: 16px;
+}
+.game-card h2 { margin-top: 0; }
+.game-card img { display: block; width: 100%; }
+
+/* --- screenshots ---------------------------------------------------------- */
+.screenshots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.screenshots figure { margin: 0; }
+.screenshots img { display: block; width: 100%; border: 2px solid #444; }
+.screenshots a:hover img, .screenshots a:focus img { border-color: var(--amber); }
+figcaption { color: var(--muted); font-size: 16px; margin-top: 4px; }
+
+/* --- Ko-fi button --------------------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--page);
+  background: var(--amber);
+  font-size: 32px;
+  line-height: 1;
+  padding: 12px 20px;
+  text-decoration: none;
+  border: 3px solid var(--amber);
+}
+.button:hover, .button:focus { background: var(--cyan); border-color: var(--cyan); color: var(--page); }
+.button img { image-rendering: pixelated; }
+
+/* --- credits: same rules as the in-game credits roll ------------------------ */
+.credits {
+  background: var(--panel);
+  border: 3px solid var(--amber);
+  padding: 16px 24px;
+  font-size: 16px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.credits p { margin: 0 0 2px; }
+.credits .gap { height: 1em; }
+.credits .credit-h1, .credits .credit-h2, .credits .credit-h3 {
+  font-family: var(--pixel);
+  line-height: 1.1;
+  margin: 12px 0 6px;
+  -webkit-font-smoothing: none;
+}
+.credits .credit-h1 { color: var(--amber); font-size: 48px; }
+.credits .credit-h2 { color: var(--amber); font-size: 32px; }
+.credits .credit-h3 { color: var(--cyan);  font-size: 48px; }
+.credits .credit-item { padding-left: 1.4em; text-indent: -1em; }
+.credits .credit-item::before { content: "-"; display: inline-block; width: 1em; text-indent: 0; }
+
+/* --- footer -------------------------------------------------------------- */
+.site-footer {
+  margin-top: 48px;
+  padding: 16px 24px;
+  border-top: 3px solid var(--amber);
+  background: var(--panel);
+  color: var(--muted);
+  text-align: center;
+}
+.site-footer p { margin: 4px 0; }
+.small { font-size: 14px; }
+
+/* --- phones ----------------------------------------------------------------- */
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .site-header { padding: 12px 16px; }
+  .site-name, .site-nav a { font-size: 32px; }
+  .site-nav { gap: 16px; }
+  main { padding: 16px; }
+  h1 { font-size: 32px; }
+  h2, h3 { font-size: 32px; }
+  .game-card { grid-template-columns: 1fr; }
+  .credits { padding: 12px 16px; }
+  .credits .credit-h1, .credits .credit-h3 { font-size: 32px; }
+  .button { font-size: 32px; }
+}

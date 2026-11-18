@@ -1,0 +1,4 @@
+# Built site (Cloudflare Pages builds it from the sources)
+public/
+__pycache__/
+.venv/
