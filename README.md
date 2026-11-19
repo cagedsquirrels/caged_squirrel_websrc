@@ -13,9 +13,14 @@ Pages are written in Markdown and turned into plain HTML by `build.py`; no JavaS
 ## Preview locally
 
 ```
-pip install -r requirements.txt
-python build.py
+python -m pip install -r requirements.txt
+(or use a venv?)
+
+python build.py --sync ../coffee
+(this updates the credits)
+
 python -m http.server -d public
+
 ```
 
 Then open http://localhost:8000. `public/` is rebuilt from scratch each time and isn't committed.
@@ -45,6 +50,11 @@ The game repo is private, so copies live here and are committed:
 
 ## Publishing on Cloudflare Pages
 
+```
+git add *
+git commit -m <changes reason>
+git push
+```
 1. Push this folder to its own git repo.
 2. In the Cloudflare dashboard: **Workers & Pages > Create > Pages > Connect to Git**, pick the repo.
 3. Build settings:

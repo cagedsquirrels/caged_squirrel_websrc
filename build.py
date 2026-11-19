@@ -49,7 +49,10 @@ URL = re.compile(r"(https?://[^\s<]+|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|net|o
 
 # --- pages -------------------------------------------------------------------
 def read_page(path: Path) -> tuple[dict[str, str], str]:
-    """Split a content file into its header (title, url, ...) and Markdown body."""
+    """
+    Split a content file into its header (title, url, ...) and Markdown body.
+    :returns: a dictionary of strings and a body
+    """
     text = path.read_text(encoding="utf-8")
     meta: dict[str, str] = {}
     if text.startswith("---"):
@@ -63,7 +66,8 @@ def read_page(path: Path) -> tuple[dict[str, str], str]:
 
 
 def output_path(url: str) -> Path:
-    """/ -> public/index.html, /coffee/ -> public/coffee/index.html (so the address has no .html).
+    """
+    / -> public/index.html, /coffee/ -> public/coffee/index.html (so the address has no .html).
 
     /404/ -> public/404.html, which Cloudflare Pages serves for unknown addresses.
     """
@@ -75,7 +79,9 @@ def output_path(url: str) -> Path:
 
 # --- shortcodes ----------------------------------------------------------------
 def linkify(text: str) -> str:
-    """Escape a line of plain text and turn the web addresses in it into links."""
+    """
+    Escape a line of plain text and turn the web addresses in it into links.
+    """
     out, last = [], 0
     for match in URL.finditer(text):
         address = match.group(0).rstrip(".,)")
@@ -88,7 +94,8 @@ def linkify(text: str) -> str:
 
 
 def render_credits() -> str:
-    """content/credits.md as HTML, following the game's rules (coffee/credits_view.py):
+    """
+    content/credits.md as HTML, following the game's rules (coffee/credits_view.py):
     # large amber, ## medium amber, ### large cyan, "- " bullets, <br> breaks, a line of
     only <br> leaves an empty line.
     """
@@ -120,6 +127,9 @@ def render_credits() -> str:
 
 
 def render_kofi() -> str:
+    """
+    kofi-button
+    """
     return (
         f'<p class="kofi"><a class="button" href="{KOFI_URL}" rel="noopener">'
         '<img src="/static/icons/cup.png" alt="" width="32" height="32"> Leave a tip on Ko-fi</a></p>'
@@ -144,7 +154,9 @@ def render_screenshots() -> str:
     return '<div class="screenshots">' + "".join(figures) + "</div>"
 
 
-SHORTCODES = {"credits": render_credits, "kofi": render_kofi, "screenshots": render_screenshots}
+SHORTCODES = {"credits": render_credits, 
+              "kofi": render_kofi, 
+              "screenshots": render_screenshots}
 
 
 def apply_shortcodes(page_html: str) -> str:
@@ -214,4 +226,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    result = main()
+    sys.exit(result)
