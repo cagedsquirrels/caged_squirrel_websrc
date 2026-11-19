@@ -15,11 +15,6 @@ Python scripting!
 Packaging
  - Nuitka the Python Compiler https://nuitka.net/
 
-## Character art
-CraftPix.net, used under the CraftPix file licence: https://craftpix.net/file-licenses/
-- "City Man Pixel Art Character Sprite Sheets" (free) - https://craftpix.net/freebies/city-man-pixel-art-character-sprite-sheets/
-- "Free City Trader Character Sprite Sheets Pixel Art" (free) - https://craftpix.net/freebies/free-city-trader-character-sprite-sheets-pixel-art/
-
 ## Font
 "m6x11" by Daniel Linssen - https://managore.itch.io/m6x11
 
@@ -27,13 +22,24 @@ CraftPix.net, used under the CraftPix file licence: https://craftpix.net/file-li
 Written in Ink by inkle - https://www.inklestudios.com/ink/
 Played with bink (blade-ink) - https://github.com/bladecoder/blade-ink-python
 
+## Character art
+CraftPix.net, used under the CraftPix file licence: https://craftpix.net/file-licenses/
+- "City Man Pixel Art Character Sprite Sheets" (free) - https://craftpix.net/freebies/city-man-pixel-art-character-sprite-sheets/
+- "Free City Trader Character Sprite Sheets Pixel Art" (free) - https://craftpix.net/freebies/free-city-trader-character-sprite-sheets-pixel-art/
+
 ## Vehicle Art
 Overcrafted.itch.io FREE 2D Vehicle Assets
  - motorbikes  https://overcrafted.itch.io/free-paid-vehicle-car-sprites-
 CraftPix.net, used under the CraftPix file licence: https://craftpix.net/file-licenses/
  - old car https://craftpix.net/freebies/free-old-cars-pixel-art-asset-pack/
-# <br>
-# <br>
+
+## Animal Art
+- Black cat sprite by YukiCrimson - https://yukicrimson.itch.io/black-cat-sprite
+- Animated Welsh Corgi Sprites by Pixelcave - https://pixelcave.itch.io/animated-corgi-sprite
+
+## SFX
+- dog - https://freesound.org/people/Youmenanna/sounds/189688/
+- cat - https://freesound.org/people/cubilon/sounds/130968/
 
 ### This entire game was written using Python
 ### And uses the Python Arcade library
