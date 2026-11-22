@@ -1,4 +1,5 @@
-"""Build the Caged Squirrels website: Markdown pages in content/ -> HTML in public/.
+"""
+Build the Caged Squirrels website: Markdown pages in content/ -> HTML in public/.
 
     python build.py                    build the site into public/
     python build.py --sync ../coffee   first copy the game's credits (coffee/assets/CREDITS.md)
@@ -165,7 +166,9 @@ def devblog_posts() -> list[Path]:
     if not DEVBLOG.is_dir():
         return []
     posts = [path for path in DEVBLOG.glob("*.md") if NUMBERED.match(path.name)]
-    return sorted(posts, key=lambda path: (int(NUMBERED.match(path.name).group(1)), path.name))
+    sorted_posts = sorted(posts, key=lambda path: (int(NUMBERED.match(path.name).group(1)), path.name))
+    sorted_posts.reverse()
+    return sorted_posts
 
 
 def render_devblog() -> str:
