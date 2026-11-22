@@ -5,7 +5,7 @@ description: Origins of the Caged Squirrels Studio.
 ---
 # 01 First, why Caged Squirrels?
 
-<p>An origin story.</p>
+<p>6 Nov '26. An origin story.</p>
 <p>My first game was probably <b>Space Invaders</b>, written in <b>Pascal</b>. Back when it was Borland, and it would have been DOS 3.1 . 
 We used to sneak into the computer lab and steal computer tim in the back and instead of doing assignments a few of us would mess about. 
 Space invaders was dead slow and it had no game engine to speak of. I think the best waty to learn to program is by writting a game, or writting an app that does a thing you love if games are not your thing.<p>

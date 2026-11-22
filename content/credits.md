@@ -28,6 +28,7 @@ Played with bink (blade-ink) - https://github.com/bladecoder/blade-ink-python
 CraftPix.net, used under the CraftPix file licence: https://craftpix.net/file-licenses/
  - Craftpix.net Game City Backgrounds - https://free-game-assets.itch.io/game-city-backgrounds-pixel-art
  - Craftpix.net Free Pixel Art - https://free-game-assets.itch.io/free-pixel-art-street-backgrounds
+ - free-game-assets.itch.io (Modern city) - https://free-game-assets.itch.io/free-city-backgrounds-pixel-art
 
 ## Character Art
 - "City Man Pixel Art Character Sprite Sheets" (free) - https://craftpix.net/freebies/city-man-pixel-art-character-sprite-sheets/
@@ -45,7 +46,6 @@ aglyunagames.itch.io for the yellow bus in 'The Pixel Art Bus Assets'
  - East bloc busses - https://aglyunagames.itch.io/pixel-art-buses
 furkanakkurt.itch.io - 2D Pixel Art Vehicles Bus
  - Neoplan Citiliner bus (white) - https://furkanakkurt.itch.io/2d-pixel-art-vehicles-bus-and-taxi
-
 
 ## Animal Art
 - Black cat sprite by YukiCrimson - https://yukicrimson.itch.io/black-cat-sprite
