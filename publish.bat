@@ -6,10 +6,11 @@ exit /b 1
 
 :COMMIT
 git add .
-git commit -m
+git commit
 IF '%ERRORLEVEL%'=='0' GOTO PUSH
 echo An error occurred while adding files to push. Publish failed!!
 exit /b 1
 
 :PUSH
 git push
+echo Pushed changes
