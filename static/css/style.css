@@ -170,6 +170,14 @@ figcaption { color: var(--muted); font-size: 16px; margin-top: 4px; }
 .credits .credit-item { padding-left: 1.4em; text-indent: -1em; }
 .credits .credit-item::before { content: "-"; display: inline-block; width: 1em; text-indent: 0; }
 
+/* --- devblog: posts one below the other ------------------------------------ */
+.post > :first-child { margin-top: 0; }
+.post + .post {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 3px solid var(--amber);
+}
+
 /* --- footer -------------------------------------------------------------- */
 .site-footer {
   margin-top: 48px;

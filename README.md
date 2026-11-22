@@ -8,6 +8,7 @@ Pages are written in Markdown and turned into plain HTML by `build.py`; no JavaS
 | `/`        | `content/index.md`  |
 | `/coffee/` | `content/coffee.md` |
 | `/tips/`   | `content/tips.md`   |
+| `/devblog/`| `content/devblog.md` + the posts in `content/devblog/` |
 | 404 page   | `content/404.md`    |
 
 ## Preview locally
@@ -34,6 +35,11 @@ Then open http://localhost:8000. `public/` is rebuilt from scratch each time and
   - `{{screenshots}}` - every PNG in `static/img/screenshots/`, in file-name order; the caption
     comes from the name (`3-talking-to-Mia.png` -> "Talking to Mia")
   - `{{credits}}` - the game credits, styled like the in-game credits roll
+  - `{{devblog}}` - every devblog post, one below the other (used by `content/devblog.md`)
+- **Devblog posts:** one Markdown file per post in `content/devblog/`, named with a number first
+  (`01 first.md`, `02 new engine.md`, ...). They appear in number order, so `2` comes before `10`.
+  A file without a number at the start is skipped, which is handy for drafts. A `---` header in a
+  post is allowed but ignored.
 - **Look:** `static/css/style.css`. Keep the m6x11 pixel font at 16, 32 or 48 px so it stays sharp.
 - **Shared parts** (header, navigation, footer): `templates/page.html`. Navigation links are `NAV`
   in `build.py`.

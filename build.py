@@ -19,6 +19,7 @@ Shortcodes you can put on a line of their own in a page:
     {{credits}}       the game credits (content/credits.md), styled like the in-game credits roll
     {{kofi}}          the Ko-fi tip button
     {{screenshots}}   every image in static/img/screenshots/, in name order
+    {{devblog}}       every numbered post in content/devblog/ ("01 first.md", "02 ...md"), in number order
 """
 
 from __future__ import annotations
@@ -41,7 +42,9 @@ PUBLIC = ROOT / "public"
 
 SITE_NAME = "Caged Squirrels"
 KOFI_URL = "https://ko-fi.com/cagedsquirrels"
-NAV = [("Home", "/"), ("Coffee", "/coffee/"), ("Tips", "/tips/")]
+NAV = [("Home", "/"), ("Coffee", "/coffee/"), ("Tips", "/tips/"), ("Devblog", "/devblog/")]
+DEVBLOG = CONTENT / "devblog"
+NUMBERED = re.compile(r"^(\d+)")  # "01 first.md" -> 1
 
 LINE_BREAK = re.compile(r"\s*<br\s*/?>\s*", re.IGNORECASE)
 URL = re.compile(r"(https?://[^\s<]+|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|net|org|io|co\.uk|academy)(?:/[^\s<]*)?)", re.IGNORECASE)
@@ -154,16 +157,52 @@ def render_screenshots() -> str:
     return '<div class="screenshots">' + "".join(figures) + "</div>"
 
 
-SHORTCODES = {"credits": render_credits, 
-              "kofi": render_kofi, 
-              "screenshots": render_screenshots}
+def devblog_posts() -> list[Path]:
+    """
+    The numbered Markdown files in content/devblog/, in number order (2 comes before 10).
+    Files whose names don't start with a number are left out, so drafts can sit there unnumbered.
+    """
+    if not DEVBLOG.is_dir():
+        return []
+    posts = [path for path in DEVBLOG.glob("*.md") if NUMBERED.match(path.name)]
+    return sorted(posts, key=lambda path: (int(NUMBERED.match(path.name).group(1)), path.name))
 
 
-def apply_shortcodes(page_html: str) -> str:
+def render_devblog() -> str:
+    """
+    Every devblog post, one below the other. A post may start with a --- header like a page;
+    only its Markdown body is shown.
+    """
+    posts = devblog_posts()
+    if not posts:
+        return '<p class="placeholder">No posts yet.</p>'
+    parts = ['<div class="devblog">']
+    for path in posts:
+        _, body = read_page(path)
+        number = NUMBERED.match(path.name).group(1)
+        content = apply_shortcodes(render_markdown(body), allow_devblog=False)
+        parts.append(f'<article class="post" id="post-{number}">\n{content}\n</article>')
+    parts.append("</div>")
+    return "\n".join(parts)
+
+
+SHORTCODES = {"credits": render_credits,
+              "kofi": render_kofi,
+              "screenshots": render_screenshots,
+              "devblog": render_devblog}
+
+
+def render_markdown(body: str) -> str:
+    return markdown.markdown(body, extensions=["attr_list", "md_in_html"])
+
+
+def apply_shortcodes(page_html: str, allow_devblog: bool = True) -> str:
     def replace(match: re.Match) -> str:
         name = match.group(1).lower()
         if name not in SHORTCODES:
             raise SystemExit(f"Unknown shortcode {{{{{name}}}}}")
+        if name == "devblog" and not allow_devblog:
+            raise SystemExit("{{devblog}} can't be used inside a devblog post")
         return SHORTCODES[name]()
 
     return re.sub(r"<p>\s*\{\{\s*(\w+)\s*\}\}\s*</p>", replace, page_html)
@@ -188,7 +227,7 @@ def build() -> list[Path]:
         if path.name == "credits.md":
             continue  # used by the {{credits}} shortcode, not a page of its own
         meta, body = read_page(path)
-        content = apply_shortcodes(markdown.markdown(body, extensions=["attr_list", "md_in_html"]))
+        content = apply_shortcodes(render_markdown(body))
         title = SITE_NAME if meta["url"] == "/" else f"{meta['title']} - {SITE_NAME}"
         page = (
             template.replace("{{title}}", html.escape(title))
